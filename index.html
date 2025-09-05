@@ -86,26 +86,6 @@
         }
       };
 
-      /**
-       * Loading skeleton component
-       */
-      const LoadingSkeleton = () => (
-        <div>
-          <div className="loading-skeleton loading-text large"></div>
-          <div className="loading-skeleton loading-text" style={{marginTop: 16}}></div>
-          <div className="loading-skeleton loading-bar" style={{marginTop: 20}}></div>
-          <div className="grid" style={{marginTop: 12}}>
-            <div className="loading-skeleton loading-grid-item"></div>
-            <div className="loading-skeleton loading-grid-item"></div>
-            <div className="loading-skeleton loading-grid-item"></div>
-          </div>
-          <div style={{marginTop: 16}}>
-            <div className="loading-skeleton loading-pill"></div>
-            <div className="loading-skeleton loading-pill"></div>
-            <div className="loading-skeleton loading-pill"></div>
-          </div>
-        </div>
-      );
 
       /**
        * Progress bar component
@@ -149,7 +129,6 @@
         const [peopleJar, setPeopleJar] = useState(0);
         const [friendsJar, setFriendsJar] = useState(0);
         const [lastUpdated, setLastUpdated] = useState("");
-        const [loading, setLoading] = useState(false);
         const [error, setError] = useState("");
 
         // Calculate derived values
@@ -173,7 +152,6 @@
          * Fetch data from Google Apps Script
          */
         async function fetchAll() {
-          setLoading(true); 
           setError("");
           try {
             const res = await loadJSONP(CONFIG.WEB_APP_URL, { cells: "B1,B2,B3" });
@@ -188,18 +166,9 @@
             
             setPeopleJar(vPeople);
             setFriendsJar(vFriends);
-            setLastUpdated(new Date().toLocaleString('uk-UA', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-              hour: '2-digit',
-              minute: '2-digit',
-              second: '2-digit'
-            }));
+            setLastUpdated(String(B3 || "").trim());
           } catch (e) {
             setError(String(e && e.message || e));
-          } finally {
-            setLoading(false);
           }
         }
 
@@ -219,11 +188,6 @@
                 Прогрес збору на {utils.fmtN(CONFIG.TOTAL)} грн
               </h1> 
               <p className="muted" style={{marginTop: 6}}>AltexSoft підсилила збір донатом в 206 747 грн. (5000 USD). <br/>Нажаль його неможливо відобразити на банці, тому ціль там була зменшена відповідно → 1&nbsp;043&nbsp;253 грн., а я створив цю сторінку, щоб ви могли бачити, як збір просовувається враховуючи всі надходження.</p>
-              <div style={{display: "flex", gap: 8, marginTop: 12}}>
-                <button className="btn" onClick={fetchAll} disabled={loading}>
-                  {loading ? "Оновлюю…" : "Оновити зараз"}
-                </button>
-              </div>
               {lastUpdated && (
                 <div style={{marginTop: 8, fontSize: 12}} className="muted">
                   Оновлено: {lastUpdated}
@@ -241,10 +205,7 @@
                 Щоб запакувати екіпаж залишилось:
               </h2>
               <div style={{marginTop: 20}}>
-                {loading ? (
-                  <LoadingSkeleton />
-                ) : (
-                  <>
+                <>
                     <div style={{ 
                       fontSize: "clamp(32px,6vw,48px)", 
                       fontWeight: 900, 
@@ -300,8 +261,7 @@
                         Відкрити дружню банку
                       </a>
                     </div>
-                  </>
-                )}
+                </>
               </div>
             </section>
           </div>
