@@ -153,10 +153,12 @@
          */
         async function fetchAll() {
           setError("");
+          console.log(11111);
+
           try {
             const res = await loadJSONP(CONFIG.WEB_APP_URL, { cells: "B1,B2,B3" });
             if (!res || !res.ok) throw new Error(res && res.error || "No data");
-            
+            console.log(res);
             const { B1, B2, B3 } = res.data || {};
             const vPeople = utils.parseNumberUA(B2);
             const vFriends = utils.parseNumberUA(B1);
