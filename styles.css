@@ -1,0 +1,235 @@
+/* Ukrainian Military Charity App - Styles */
+
+:root { 
+  --c1: #0057B7; /* Ukrainian Blue */
+  --c2: #FFD700; /* Ukrainian Yellow/Gold */
+  --c3: #E5E7EB; /* Light Gray */
+  --bg-primary: #FAFBFC;
+  --bg-card: #FFFFFF;
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --border-light: #E5E7EB;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+}
+
+body { 
+  margin: 0; 
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; 
+  background: var(--bg-primary); 
+  color: var(--text-primary); 
+}
+
+.container { 
+  max-width: 960px; 
+  margin: 0 auto; 
+  padding: 24px; 
+}
+
+.card { 
+  border: 1px solid var(--border-light); 
+  border-radius: 16px; 
+  padding: 24px; 
+  background: var(--bg-card);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.bar { 
+  position: relative; 
+  width: 100%; 
+  height: 16px; 
+  background: var(--border-light); 
+  border-radius: 999px; 
+  overflow: hidden; 
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.seg1, .seg2, .seg3, .seg4 { 
+  position: absolute; 
+  top: 0; 
+  bottom: 0; 
+}
+
+.seg1 { 
+  left: 0; 
+  background: linear-gradient(135deg, #4A90E2, #357ABD); 
+}
+
+.seg2 { 
+  background: linear-gradient(135deg, #F4D03F, #D4AC0D); 
+}
+
+.seg3 { 
+  background: linear-gradient(135deg, #7FB069, #5c9594); 
+}
+.seg4 { 
+  background: linear-gradient(135deg, #5c9594, #357ABD); 
+}
+
+.pill { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px; 
+  padding: 6px 12px; 
+  border-radius: 999px; 
+  font-size: 12px; 
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.pill1 { 
+  background: linear-gradient(135deg, #4A90E2, #357ABD); 
+  color: #fff; 
+}
+
+.pill2 { 
+  background: linear-gradient(135deg, #F4D03F, #D4AC0D); 
+  color: var(--text-primary); 
+}
+
+.pill3 { 
+  background: linear-gradient(135deg, #7FB069, #357ABD); 
+  color: #fff; 
+}
+
+.btn { 
+  padding: 8px 16px; 
+  border: 1px solid var(--border-light); 
+  border-radius: 999px; 
+  background: var(--bg-card); 
+  cursor: pointer; 
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn:hover:not([disabled]) { 
+  background: #4A90E2; 
+  color: #fff; 
+  border-color: #4A90E2;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.15);
+}
+
+.btn[disabled] { 
+  opacity: .6; 
+  cursor: default; 
+}
+
+.donate-btn {
+  background: linear-gradient(135deg, var(--c1), var(--c2)) !important;
+  color: #fff !important;
+  border: none !important;
+  font-size: 18px !important;
+  padding: 12px 24px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  box-shadow: 0 4px 12px rgba(0, 87, 183, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.donate-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 87, 183, 0.4) !important;
+  background: linear-gradient(135deg, #003D82, #E6C200) !important;
+}
+
+.muted { 
+  color: var(--text-secondary); 
+}
+
+.grid { 
+  display: grid; 
+  gap: 16px; 
+  grid-template-columns: repeat(4, minmax(0, 1fr)); 
+}
+
+@media (max-width: 960px) { 
+  .grid { 
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+  } 
+}
+
+@media (max-width: 720px) { 
+  .grid { 
+    grid-template-columns: 1fr; 
+  } 
+}
+
+code { 
+  background: var(--border-light); 
+  padding: 1px 4px; 
+  border-radius: 4px; 
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+/* Header styling improvements */
+h1 {
+  background: linear-gradient(135deg, var(--c1), var(--c2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Error styling */
+.error {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.1);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border-left: 3px solid var(--error);
+}
+
+/* Modern Loading Animation */
+.loading-skeleton {
+  background: linear-gradient(90deg, #F8FAFC 25%, #E2E8F0 50%, #F8FAFC 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% { 
+    background-position: -200% 0; 
+  }
+  100% { 
+    background-position: 200% 0; 
+  }
+}
+
+.loading-text {
+  height: 1.2em;
+  width: 60%;
+  margin: 4px 0;
+}
+
+.loading-text.large {
+  height: 2.5em;
+  width: 40%;
+}
+
+.loading-text.medium {
+  height: 1.8em;
+  width: 50%;
+}
+
+.loading-bar {
+  height: 16px;
+  width: 100%;
+  border-radius: 999px;
+}
+
+.loading-pill {
+  height: 32px;
+  width: 120px;
+  border-radius: 999px;
+  display: inline-block;
+  margin: 4px 8px 4px 0;
+}
+
+.loading-grid-item {
+  height: 1.2em;
+  width: 80%;
+}
