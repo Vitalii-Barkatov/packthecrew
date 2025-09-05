@@ -162,7 +162,7 @@
         const combined = CONFIG.COMPANY + totalPeopleDonations;
         const projectedCombined = combined + companyMatching;
         const projectedCombinedPct = utils.pct(projectedCombined, CONFIG.TOTAL);
-        const remainingOpen = Math.max(0, newTarget - totalPeopleDonations);
+        const remainingOpen = Math.max(0, CONFIG.TOTAL - projectedCombined);
 
         const companyPctOfTotal = utils.pct(CONFIG.COMPANY, CONFIG.TOTAL);
         const directDonationsPctOfTotal = utils.pct(directDonations, CONFIG.TOTAL);
@@ -218,7 +218,7 @@
               }}>
                 Прогрес збору на {utils.fmtN(CONFIG.TOTAL)} грн
               </h1> 
-              <p className="muted" style={{marginTop: 6}}>AltexSoft підсилила збір донатом в 206 747 грн. (5000 USD). <br/>Нажаль його неможливо відобразити на банці, тому сума там була зменшена відповідно → 1&nbsp;043&nbsp;253 грн., а я створив цю сторінку, щоб ви могли бачити, як збір просовувається враховуючи всі надходження.</p>
+              <p className="muted" style={{marginTop: 6}}>AltexSoft підсилила збір донатом в 206 747 грн. (5000 USD). <br/>Нажаль його неможливо відобразити на банці, тому ціль там була зменшена відповідно → 1&nbsp;043&nbsp;253 грн., а я створив цю сторінку, щоб ви могли бачити, як збір просовувається враховуючи всі надходження.</p>
               <div style={{display: "flex", gap: 8, marginTop: 12}}>
                 <button className="btn" onClick={fetchAll} disabled={loading}>
                   {loading ? "Оновлюю…" : "Оновити зараз"}
