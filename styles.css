@@ -264,7 +264,7 @@ body {
 }
 
 /* Mobile Button Layout */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .donate-btn,
   .friendly-jar-btn {
     display: block !important;
@@ -272,10 +272,21 @@ body {
     margin-left: 0 !important;
     margin-bottom: var(--space-3) !important;
     text-align: center !important;
+    box-sizing: border-box !important;
   }
   
   .friendly-jar-btn:last-child {
     margin-bottom: 0 !important;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .donate-btn,
+  .friendly-jar-btn {
+    padding: var(--space-3) var(--space-4) !important;
+    font-size: var(--text-sm) !important;
+    margin-bottom: var(--space-2) !important;
   }
 }
 
@@ -346,6 +357,19 @@ code {
   
   .loading-text {
     width: 70%;
+  }
+  
+  /* Ensure buttons don't overlap on small screens */
+  .donate-btn,
+  .friendly-jar-btn {
+    min-height: 44px !important; /* Touch target size */
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 var(--space-2) 0 !important;
+  }
+  
+  .friendly-jar-btn:last-child {
+    margin-bottom: 0 !important;
   }
 }
 
