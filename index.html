@@ -188,7 +188,14 @@
             
             setPeopleJar(vPeople);
             setFriendsJar(vFriends);
-            setLastUpdated(String(B3 || "").trim());
+            setLastUpdated(new Date().toLocaleString('uk-UA', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit'
+            }));
           } catch (e) {
             setError(String(e && e.message || e));
           } finally {
@@ -210,10 +217,8 @@
                 fontSize: "clamp(24px,3vw,36px)" 
               }}>
                 Прогрес збору на {utils.fmtN(CONFIG.TOTAL)} грн
-              </h1>
-              <p className="muted" style={{marginTop: 6}}>
-                Компанія вже покрила {utils.fmtN(CONFIG.COMPANY)} грн → відкрита частина {utils.fmtN(newTarget)} грн.
-              </p>
+              </h1> 
+              <p className="muted" style={{marginTop: 6}}>AltexSoft підсилила збір донатом в 206 747 грн. (5000 USD). <br/>Нажаль його неможливо відобразити на банці, тому сума там була зменшена відповідно → загальна оновлена сума збору 1&nbsp;043&nbsp;253 грн.</p>
               <div style={{display: "flex", gap: 8, marginTop: 12}}>
                 <button className="btn" onClick={fetchAll} disabled={loading}>
                   {loading ? "Оновлюю…" : "Оновити зараз"}
@@ -263,7 +268,7 @@
 
                     <div style={{marginTop: 16, display: "flex", gap: 8, flexWrap: "wrap"}}>
                       <span className="pill pill1">
-                        AltexSoft: {utils.fmtN(CONFIG.COMPANY)} грн
+                        AltexSoft: {utils.fmtN(CONFIG.COMPANY)} грн (5000 USD)
                       </span>
                       <span className="pill pill2">
                         Донати на банку ПЖ: {utils.fmtN(directDonations)} грн
@@ -273,21 +278,26 @@
                       </span>
                     </div>
 
-                    <div style={{marginTop: 24, textAlign: "center"}}>
+                <p className="muted" style={{fontSize: 14}}>
+                  * Подвоєння дружніх банок від AltexSoft поки "віртуальне", гроші в на рахунки ПЖ будуть додані ближче до кінця збору
+                  доєднуйтесь до нас своїми дружнього банками і AltexSoft подвоїть кожен ваш збіp 
+                               </p>
+                    <div style={{marginTop: 32, textAlign: "center"}}>
                       <a 
                         href="https://send.monobank.ua/jar/LZ1YF93qx" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="btn donate-btn"
-                        style={{
-                          fontSize: "18px",
-                          padding: "12px 24px",
-                          fontWeight: "600",
-                          textDecoration: "none",
-                          display: "inline-block"
-                        }}
                       >
                         Запакувати
+                      </a>
+                      <a 
+                        href="https://t.me/+gWq7Coo3NGM2NTY6" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn friendly-jar-btn"
+                      >
+                        Відкрити дружню банку
                       </a>
                     </div>
                   </>
