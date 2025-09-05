@@ -86,6 +86,26 @@
         }
       };
 
+      /**
+       * Loading skeleton component
+       */
+      const LoadingSkeleton = () => (
+        <div>
+          <div className="loading-skeleton loading-text large"></div>
+          <div className="loading-skeleton loading-text" style={{marginTop: 16}}></div>
+          <div className="loading-skeleton loading-bar" style={{marginTop: 20}}></div>
+          <div className="grid" style={{marginTop: 12}}>
+            <div className="loading-skeleton loading-grid-item"></div>
+            <div className="loading-skeleton loading-grid-item"></div>
+            <div className="loading-skeleton loading-grid-item"></div>
+          </div>
+          <div style={{marginTop: 16}}>
+            <div className="loading-skeleton loading-pill"></div>
+            <div className="loading-skeleton loading-pill"></div>
+            <div className="loading-skeleton loading-pill"></div>
+          </div>
+        </div>
+      );
 
       /**
        * Progress bar component
@@ -129,6 +149,7 @@
         const [peopleJar, setPeopleJar] = useState(0);
         const [friendsJar, setFriendsJar] = useState(0);
         const [lastUpdated, setLastUpdated] = useState("");
+        const [loading, setLoading] = useState(false);
         const [error, setError] = useState("");
 
         // Calculate derived values
@@ -152,13 +173,12 @@
          * Fetch data from Google Apps Script
          */
         async function fetchAll() {
+          setLoading(true); 
           setError("");
-          console.log(11111);
-
           try {
             const res = await loadJSONP(CONFIG.WEB_APP_URL, { cells: "B1,B2,B3" });
             if (!res || !res.ok) throw new Error(res && res.error || "No data");
-            console.log(res);
+            
             const { B1, B2, B3 } = res.data || {};
             const vPeople = utils.parseNumberUA(B2);
             const vFriends = utils.parseNumberUA(B1);
@@ -171,6 +191,8 @@
             setLastUpdated(String(B3 || "").trim());
           } catch (e) {
             setError(String(e && e.message || e));
+          } finally {
+            setLoading(false);
           }
         }
 
@@ -207,7 +229,10 @@
                 Щоб запакувати екіпаж залишилось:
               </h2>
               <div style={{marginTop: 20}}>
-                <>
+                {loading ? (
+                  <LoadingSkeleton />
+                ) : (
+                  <>
                     <div style={{ 
                       fontSize: "clamp(32px,6vw,48px)", 
                       fontWeight: 900, 
@@ -263,7 +288,8 @@
                         Відкрити дружню банку
                       </a>
                     </div>
-                </>
+                  </>
+                )}
               </div>
             </section>
           </div>
